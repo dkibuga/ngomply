@@ -55,7 +55,7 @@
                 {% if days_until_expiry <= 180 %}
                 <div class="alert alert-warning mt-4">
                     <p><i class="bi bi-exclamation-triangle-fill"></i> Your permit will expire in {{ days_until_expiry }} days. You should begin the renewal process.</p>
-                    <a href="{{ url_for('permit_renewal.renewal_checklist') }}" class="btn btn-warning">Start Renewal Process</a>
+                    <a href="{{ url_for('permit_renewal.checklist') }}" class="btn btn-warning">Start Renewal Process</a>
                 </div>
                 {% endif %}
 

@@ -261,9 +261,28 @@ def fee_information():
             'reference': f'CBO Renewal - {organization.name}'
         }
     
+    # Create fees dictionary for the template
+    fees = {}
+    if organization.org_type == 'NGO':
+        fees = {
+            'Indigenous': 'UGX 80,000',
+            'Foreign': 'USD 100',
+            'International': 'USD 300',
+            'Regional': 'USD 200',
+            'Continental': 'USD 200'
+        }
+    else:  # CBO
+        fees = {
+            'District Level': 'UGX 30,000',
+            'Sub-county Level': 'UGX 50,000'
+        }
+    
     return render_template('permit_renewal/fee_information.html', 
-                          organization=organization, 
-                          fee_info=fee_info)
+                          organization=organization,
+                          fees=fees,
+                          fee_info=fee_info,
+                          org_type=organization.org_type,
+                          ngo_type=organization.ngo_type if organization.org_type == 'NGO' else None)
 
 @permit_renewal_bp.route('/wizard')
 @login_required

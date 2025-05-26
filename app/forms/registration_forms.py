@@ -23,7 +23,7 @@ class DocumentUploadForm(FlaskForm):
     ])
     submit = SubmitField('Upload Document')
 
-class OrganizationRegistrationForm(FlaskForm):
+'''class OrganizationRegistrationForm(FlaskForm):
     organization_name = StringField('Organization Name', validators=[DataRequired(), Length(min=2, max=100)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     phone = StringField('Phone Number', validators=[DataRequired()])
@@ -31,4 +31,21 @@ class OrganizationRegistrationForm(FlaskForm):
     organization_type = SelectField('Organization Type', 
                                   choices=[('ngo', 'NGO'), ('company', 'Company'), ('government', 'Government')],
                                   validators=[DataRequired()])
+    submit = SubmitField('Register Organization')
+    '''
+class OrganizationRegistrationForm(FlaskForm):
+    name = StringField('Organization Name', validators=[DataRequired(), Length(min=3, max=120)])
+    org_type = SelectField('Organization Type', 
+                          choices=[('NGO', 'Non-Governmental Organization (NGO)'), 
+                                  ('CBO', 'Community-Based Organization (CBO)')],
+                          validators=[DataRequired()])
+    ngo_type = SelectField('NGO Type', 
+                          choices=[('National', 'National NGO'), 
+                                  ('International', 'International NGO'),
+                                  ('Regional', 'Regional NGO'),
+                                  ('District', 'District NGO')],
+                          validators=[Optional()])
+    address = TextAreaField('Address', validators=[DataRequired(), Length(min=5, max=200)])
+    phone = StringField('Phone Number', validators=[DataRequired(), Length(min=10, max=15)])
+    email = StringField('Email Address', validators=[DataRequired(), Email()])
     submit = SubmitField('Register Organization')
