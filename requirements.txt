@@ -21,6 +21,7 @@ et_xmlfile==2.0.0
 fastapi==0.115.12
 Flask==3.1.1
 flask_cors
+flask_mail
 Flask-Migrate==4.0.5
 Flask-Login
 flask-sqlalchemy

@@ -22,3 +22,13 @@ class DocumentUploadForm(FlaskForm):
         FileAllowed(['pdf', 'doc', 'docx', 'txt', 'jpg', 'jpeg', 'png'], 'Only PDF, Word, text, and image files are allowed')
     ])
     submit = SubmitField('Upload Document')
+
+class OrganizationRegistrationForm(FlaskForm):
+    organization_name = StringField('Organization Name', validators=[DataRequired(), Length(min=2, max=100)])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    phone = StringField('Phone Number', validators=[DataRequired()])
+    address = TextAreaField('Address', validators=[DataRequired()])
+    organization_type = SelectField('Organization Type', 
+                                  choices=[('ngo', 'NGO'), ('company', 'Company'), ('government', 'Government')],
+                                  validators=[DataRequired()])
+    submit = SubmitField('Register Organization')

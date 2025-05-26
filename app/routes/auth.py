@@ -3,7 +3,11 @@ from flask_login import login_required, current_user
 from app.forms.auth_forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, ResetPasswordForm
 from app.models.models import User, AuditLog
 from app import db
-from werkzeug.urls import url_parse
+try:
+    from werkzeug.urls import url_parse
+except ImportError:
+    from urllib.parse import urlparse as url_parse
+#from werkzeug.urls import url_parse
 from flask_login import login_user, logout_user
 from app.utils.email import send_password_reset_email, send_email_verification
 from datetime import datetime

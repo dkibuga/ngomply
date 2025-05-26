@@ -1,0 +1,12 @@
+Dear {{ user.username }},
+
+Welcome to NGOmply! Please verify your email address by clicking on the following link:
+
+{{ url_for('auth.verify_email', token=token, _external=True) }}
+
+This link will expire in 24 hours.
+
+If you did not create an account with NGOmply, please ignore this email.
+
+Regards,
+The NGOmply Team
