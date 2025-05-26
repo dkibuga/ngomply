@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Compliance Tasks</h1>
+        <p class="lead">Manage your organization's compliance obligations</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5>Task List</h5>
+                <div>
+                    <a href="{{ url_for('compliance.add_task') }}" class="btn btn-primary">Add Task</a>
+                    <a href="{{ url_for('compliance.generate_reminders') }}" class="btn btn-success">Generate Reminders</a>
+                </div>
+            </div>
+            <div class="card-body">
+                {% if tasks %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Type</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for task in tasks %}
+                            <tr>
+                                <td>{{ task.title }}</td>
+                                <td>{{ task.task_type }}</td>
+                                <td>{{ task.due_date.strftime('%Y-%m-%d') }}</td>
+                                <td>
+                                    {% if task.completed %}
+                                    <span class="badge bg-success">Completed</span>
+                                    {% else %}
+                                    <span class="badge {% if task.due_date < now %}bg-danger{% elif (task.due_date - now).days < 30 %}bg-warning{% else %}bg-primary{% endif %}">
+                                        {% if task.due_date < now %}Overdue{% elif (task.due_date - now).days < 30 %}Due Soon{% else %}Upcoming{% endif %}
+                                    </span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if not task.completed %}
+                                    <a href="{{ url_for('compliance.complete_task', task_id=task.id) }}" class="btn btn-sm btn-success">Mark Complete</a>
+                                    {% endif %}
+                                    <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#taskModal{{ task.id }}">Details</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Task Detail Modals -->
+                {% for task in tasks %}
+                <div class="modal fade" id="taskModal{{ task.id }}" tabindex="-1" aria-labelledby="taskModalLabel{{ task.id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="taskModalLabel{{ task.id }}">{{ task.title }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>Description:</strong> {{ task.description }}</p>
+                                <p><strong>Type:</strong> {{ task.task_type }}</p>
+                                <p><strong>Due Date:</strong> {{ task.due_date.strftime('%Y-%m-%d') }}</p>
+                                <p><strong>Status:</strong> 
+                                    {% if task.completed %}
+                                    <span class="badge bg-success">Completed on {{ task.completion_date.strftime('%Y-%m-%d') }}</span>
+                                    {% else %}
+                                    <span class="badge {% if task.due_date < now %}bg-danger{% elif (task.due_date - now).days < 30 %}bg-warning{% else %}bg-primary{% endif %}">
+                                        {% if task.due_date < now %}Overdue{% elif (task.due_date - now).days < 30 %}Due Soon{% else %}Upcoming{% endif %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                {% if not task.completed %}
+                                <a href="{{ url_for('compliance.complete_task', task_id=task.id) }}" class="btn btn-success">Mark Complete</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                {% else %}
+                <div class="alert alert-info">
+                    <p>No compliance tasks found. Click "Add Task" to create a new task or "Generate Reminders" to create standard compliance tasks.</p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('compliance.index') }}" class="btn btn-secondary">Back to Compliance</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Renewal Wizard</h1>
+        <p class="lead">Step-by-step guidance for {{ org_type }} permit renewal</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Renewal Process</h5>
+            </div>
+            <div class="card-body">
+                <div class="stepper-wrapper">
+                    {% for step in steps %}
+                    <div class="stepper-item">
+                        <div class="step-counter">{{ step.number }}</div>
+                        <div class="step-name">{{ step.title }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="mt-5">
+                    {% for step in steps %}
+                    <div class="card mb-3">
+                        <div class="card-header d-flex align-items-center">
+                            <div class="badge bg-primary rounded-pill me-2">{{ step.number }}</div>
+                            <h5 class="mb-0">{{ step.title }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>{{ step.description }}</p>
+                            
+                            {% if step.number == 1 %}
+                            <a href="{{ url_for('permit_renewal.checklist') }}" class="btn btn-outline-primary">View Document Checklist</a>
+                            {% elif step.number == 2 and org_type == 'NGO' %}
+                            <a href="{{ url_for('knowledge_base.forms') }}" class="btn btn-outline-primary">Access Form H</a>
+                            {% elif step.number == 3 %}
+                            <a href="{{ url_for('permit_renewal.fee_information') }}" class="btn btn-outline-primary">View Fee Information</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('permit_renewal.index') }}" class="btn btn-secondary">Back to Permit Renewal</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .stepper-wrapper {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        position: relative;
+    }
+    
+    .stepper-wrapper::before {
+        content: "";
+        position: absolute;
+        top: 20px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #e0e0e0;
+        z-index: 0;
+    }
+    
+    .stepper-item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        z-index: 1;
+    }
+    
+    .step-counter {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #0d6efd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+    
+    .step-name {
+        font-size: 0.85rem;
+        text-align: center;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Document List</h1>
+        <p class="lead">Manage your organization's documents</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5>Uploaded Documents</h5>
+                <a href="{{ url_for('registration.upload_document') }}" class="btn btn-primary">Upload New Document</a>
+            </div>
+            <div class="card-body">
+                {% if documents %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Upload Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for document in documents %}
+                            <tr>
+                                <td>{{ document.name }}</td>
+                                <td>{{ document.document_type }}</td>
+                                <td>{{ document.upload_date.strftime('%Y-%m-%d') }}</td>
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-info">View</a>
+                                    <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <p>No documents uploaded yet. Click the button above to upload your first document.</p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('registration.index') }}" class="btn btn-secondary">Back to Registration</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

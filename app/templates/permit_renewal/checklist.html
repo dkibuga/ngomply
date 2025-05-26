@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Renewal Checklist</h1>
+        <p class="lead">Required documents for {{ org_type }} permit renewal</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>{{ org_type }} Renewal Documents</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Document</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in checklist %}
+                            <tr>
+                                <td>{{ item }}</td>
+                                <td>
+                                    <span class="badge bg-warning">Pending</span>
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('registration.upload_document') }}" class="btn btn-sm btn-primary">Upload</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-between">
+                    <a href="{{ url_for('permit_renewal.index') }}" class="btn btn-secondary">Back to Permit Renewal</a>
+                    <a href="{{ url_for('permit_renewal.document_aggregation') }}" class="btn btn-primary">Aggregate Documents</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

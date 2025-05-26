@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Fee Information</h1>
+        <p class="lead">Renewal fee information for {{ org_type }}</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h5>{{ org_type }} Renewal Fees</h5>
+                {% if org_type == 'NGO' and ngo_type %}
+                <span class="badge bg-info">{{ ngo_type }} NGO</span>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Fee Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for category, amount in fees.items() %}
+                            <tr {% if org_type == 'NGO' and category == ngo_type %}class="table-primary"{% endif %}>
+                                <td>{{ category }}</td>
+                                <td>{{ amount }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="alert alert-info mt-4">
+                    <h6>Payment Instructions</h6>
+                    <p>Fees should be paid to the following account:</p>
+                    <ul>
+                        <li><strong>Bank:</strong> Bank of Uganda</li>
+                        <li><strong>Account Name:</strong> NGO Bureau</li>
+                        <li><strong>Account Number:</strong> 003300088000</li>
+                        <li><strong>Reference:</strong> [Your Organization Name] - Permit Renewal</li>
+                    </ul>
+                    <p>Please attach a copy of the payment receipt to your renewal application.</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('permit_renewal.index') }}" class="btn btn-secondary">Back to Permit Renewal</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

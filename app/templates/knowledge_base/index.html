@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Knowledge Base Module</h1>
+        <p class="lead">Access regulatory information and guides for NGOs and CBOs in Uganda</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-journal-text fs-1 text-primary mb-3"></i>
+                <h5 class="card-title">Legal Documents</h5>
+                <p class="card-text">Access laws, regulations, and guidelines</p>
+                <a href="{{ url_for('knowledge_base.legal_documents') }}" class="btn btn-primary">View Documents</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-file-earmark-text fs-1 text-success mb-3"></i>
+                <h5 class="card-title">Forms</h5>
+                <p class="card-text">Access required forms for registration and compliance</p>
+                <a href="{{ url_for('knowledge_base.forms') }}" class="btn btn-success">View Forms</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-book fs-1 text-info mb-3"></i>
+                <h5 class="card-title">Guides</h5>
+                <p class="card-text">Access step-by-step guides and tutorials</p>
+                <a href="{{ url_for('knowledge_base.guides') }}" class="btn btn-info">View Guides</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Search Knowledge Base</h5>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('knowledge_base.search') }}" method="GET">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search for laws, regulations, forms, or guides..." name="query">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5>Latest Updates</h5>
+                <a href="{{ url_for('knowledge_base.update_knowledge_base') }}" class="btn btn-sm btn-outline-primary">Update Knowledge Base</a>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        NGO Act, 2016 - Updated Guidelines
+                        <span class="badge bg-primary rounded-pill">New</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        NGO (Fees) Regulations, 2020
+                        <span class="badge bg-primary rounded-pill">Updated</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Form H - Permit Renewal Application
+                        <span class="badge bg-primary rounded-pill">Updated</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

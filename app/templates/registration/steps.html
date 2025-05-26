@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Registration Steps</h1>
+        <p class="lead">Follow these steps to complete your {{ org_type }} registration</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                {% if org_type == 'NGO' %}
+                <h3>NGO Registration Process</h3>
+                <div class="timeline mt-4">
+                    <div class="timeline-item">
+                        <div class="timeline-marker bg-primary"></div>
+                        <div class="timeline-content">
+                            <h4>Step 1: URSB Incorporation</h4>
+                            <p>Register your organization with the Uganda Registration Services Bureau (URSB)</p>
+                            <ul>
+                                <li>Prepare Memorandum and Articles of Association</li>
+                                <li>Complete URSB Form 20 (Application for Registration)</li>
+                                <li>Complete URSB Form 18 (Notice of Situation of Registered Office)</li>
+                                <li>Pay prescribed fees</li>
+                                <li>Submit application to URSB</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker bg-primary"></div>
+                        <div class="timeline-content">
+                            <h4>Step 2: NGO Bureau Registration</h4>
+                            <p>Register with the National Bureau for Non-Governmental Organizations</p>
+                            <ul>
+                                <li>Complete NGO Bureau Form A (Application for Registration)</li>
+                                <li>Obtain NGO Bureau Form D (Recommendation by DNMC)</li>
+                                <li>Complete NGO Bureau Form N (Notification of Executive Committee Members)</li>
+                                <li>Prepare Annual Work Plan and Budget</li>
+                                <li>Prepare Governance Structure Chart</li>
+                                <li>Prepare Statement on Funding Sources</li>
+                                <li>Prepare Statement on Staffing Requirements</li>
+                                <li>Pay prescribed fees</li>
+                                <li>Submit application to NGO Bureau</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker bg-primary"></div>
+                        <div class="timeline-content">
+                            <h4>Step 3: Obtain Permit of Operation</h4>
+                            <p>After approval, collect your Certificate of Registration and Permit of Operation</p>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <h3>CBO Registration Process</h3>
+                <div class="timeline mt-4">
+                    <div class="timeline-item">
+                        <div class="timeline-marker bg-success"></div>
+                        <div class="timeline-content">
+                            <h4>Step 1: Prepare Required Documents</h4>
+                            <p>Prepare the necessary documents for CBO registration</p>
+                            <ul>
+                                <li>Draft Constitution</li>
+                                <li>Complete CBO Form K (Application for Registration)</li>
+                                <li>Prepare Annual Work Plan and Budget</li>
+                                <li>Prepare Governance Structure Chart</li>
+                                <li>Prepare Statement on Funding Sources</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker bg-success"></div>
+                        <div class="timeline-content">
+                            <h4>Step 2: Submit to DNMC</h4>
+                            <p>Submit your application to the District Non-Governmental Monitoring Committee</p>
+                            <ul>
+                                <li>Pay prescribed fees</li>
+                                <li>Submit all required documents</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker bg-success"></div>
+                        <div class="timeline-content">
+                            <h4>Step 3: Obtain Registration Certificate</h4>
+                            <p>After approval, collect your CBO Registration Certificate</p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="d-flex justify-content-between">
+            <a href="{{ url_for('registration.index') }}" class="btn btn-secondary">Back to Registration</a>
+            <a href="{{ url_for('registration.document_checklist') }}" class="btn btn-primary">View Document Checklist</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .timeline {
+        position: relative;
+        padding-left: 30px;
+    }
+    .timeline-item {
+        position: relative;
+        padding-bottom: 30px;
+    }
+    .timeline-marker {
+        position: absolute;
+        left: -30px;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+    }
+    .timeline-item:not(:last-child):before {
+        content: '';
+        position: absolute;
+        left: -23px;
+        top: 15px;
+        height: 100%;
+        width: 2px;
+        background-color: #dee2e6;
+    }
+</style>
+{% endblock %}

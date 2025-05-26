@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Registration Module</h1>
+        <p class="lead">Manage your organization's registration process</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-building fs-1 text-primary mb-3"></i>
+                <h5 class="card-title">Register Organization</h5>
+                <p class="card-text">Register your NGO or CBO in the system</p>
+                <a href="{{ url_for('registration.register_organization') }}" class="btn btn-primary">Start</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-list-check fs-1 text-success mb-3"></i>
+                <h5 class="card-title">Document Checklist</h5>
+                <p class="card-text">View required documents for registration</p>
+                <a href="{{ url_for('registration.document_checklist') }}" class="btn btn-success">View</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-file-earmark-text fs-1 text-info mb-3"></i>
+                <h5 class="card-title">Document Management</h5>
+                <p class="card-text">Upload and manage your documents</p>
+                <a href="{{ url_for('registration.document_list') }}" class="btn btn-info">Manage</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-diagram-3 fs-1 text-warning mb-3"></i>
+                <h5 class="card-title">Registration Steps</h5>
+                <p class="card-text">Step-by-step guidance for registration</p>
+                <a href="{{ url_for('registration.registration_steps') }}" class="btn btn-warning">View Steps</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-robot fs-1 text-danger mb-3"></i>
+                <h5 class="card-title">AI Document Generation</h5>
+                <p class="card-text">Generate documents using AI assistance</p>
+                <a href="{{ url_for('registration.ai_document_generation') }}" class="btn btn-danger">Generate</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Search Results</h1>
+        <p class="lead">Results for: "{{ query }}"</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>{{ results|length }} Results Found</h5>
+            </div>
+            <div class="card-body">
+                {% if results %}
+                <div class="list-group">
+                    {% for result in results %}
+                    <a href="{{ result.url }}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ result.title }}</h5>
+                            <small>{{ result.type }}</small>
+                        </div>
+                        <p class="mb-1">{{ result.snippet }}</p>
+                        <small>Last updated: {{ result.last_updated.strftime('%Y-%m-%d') }}</small>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <p>No results found for "{{ query }}". Please try different search terms.</p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-between">
+                    <a href="{{ url_for('knowledge_base.search') }}" class="btn btn-secondary">New Search</a>
+                    <a href="{{ url_for('knowledge_base.index') }}" class="btn btn-outline-secondary">Back to Knowledge Base</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

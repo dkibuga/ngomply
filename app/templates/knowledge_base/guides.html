@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Guides</h1>
+        <p class="lead">Step-by-step guides for NGOs and CBOs in Uganda</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Registration Guides</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    <a href="{{ url_for('knowledge_base.ngo_registration_guide') }}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">NGO Registration Guide</h5>
+                            <small><i class="bi bi-arrow-right"></i></small>
+                        </div>
+                        <p class="mb-1">Complete guide to registering an NGO in Uganda</p>
+                    </a>
+                    <a href="{{ url_for('knowledge_base.cbo_registration_guide') }}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">CBO Registration Guide</h5>
+                            <small><i class="bi bi-arrow-right"></i></small>
+                        </div>
+                        <p class="mb-1">Complete guide to registering a CBO in Uganda</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Compliance & Renewal Guides</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    <a href="{{ url_for('knowledge_base.compliance_guide') }}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Compliance Guide</h5>
+                            <small><i class="bi bi-arrow-right"></i></small>
+                        </div>
+                        <p class="mb-1">Guide to maintaining operational compliance</p>
+                    </a>
+                    <a href="{{ url_for('knowledge_base.renewal_guide') }}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Permit Renewal Guide</h5>
+                            <small><i class="bi bi-arrow-right"></i></small>
+                        </div>
+                        <p class="mb-1">Guide to renewing your organization's permit</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Additional Resources</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Tax Compliance</h5>
+                                <p class="card-text">Guide to tax compliance for NGOs and CBOs</p>
+                                <a href="#" class="btn btn-primary">View Guide</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Financial Management</h5>
+                                <p class="card-text">Best practices for financial management</p>
+                                <a href="#" class="btn btn-primary">View Guide</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Governance</h5>
+                                <p class="card-text">Guide to good governance practices</p>
+                                <a href="#" class="btn btn-primary">View Guide</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('knowledge_base.index') }}" class="btn btn-secondary">Back to Knowledge Base</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

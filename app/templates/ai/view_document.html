@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>AI Generated Document</h1>
+        <p class="lead">View your generated document</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5>{{ document.title }}</h5>
+                <span class="badge bg-success">AI Generated</span>
+            </div>
+            <div class="card-body">
+                <div class="document-content">
+                    {{ document.content|safe }}
+                </div>
+                
+                <div class="mt-4">
+                    <a href="{{ url_for('ai.download_document', doc_id=document.id) }}" class="btn btn-primary">
+                        <i class="bi bi-download"></i> Download Document
+                    </a>
+                    <a href="{{ url_for('ai.edit_document', doc_id=document.id) }}" class="btn btn-secondary">
+                        <i class="bi bi-pencil"></i> Edit Document
+                    </a>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('registration.ai_document_generation') }}" class="btn btn-secondary">Back to Document Generation</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .document-content {
+        font-size: 1rem;
+        line-height: 1.6;
+        white-space: pre-wrap;
+    }
+</style>
+{% endblock %}

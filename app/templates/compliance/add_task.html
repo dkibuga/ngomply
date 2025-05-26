@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Add Compliance Task</h1>
+        <p class="lead">Create a new compliance task for your organization</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h5>Task Details</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('compliance.add_task') }}">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        <label for="title" class="form-label">{{ form.title.label }}</label>
+                        {{ form.title(class="form-control", id="title") }}
+                        {% for error in form.title.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">{{ form.description.label }}</label>
+                        {{ form.description(class="form-control", id="description", rows="4") }}
+                        {% for error in form.description.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="due_date" class="form-label">{{ form.due_date.label }}</label>
+                        {{ form.due_date(class="form-control", id="due_date", type="date") }}
+                        {% for error in form.due_date.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="task_type" class="form-label">{{ form.task_type.label }}</label>
+                        {{ form.task_type(class="form-select", id="task_type") }}
+                        {% for error in form.task_type.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="d-grid gap-2">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('compliance.tasks') }}" class="btn btn-secondary">Back to Tasks</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

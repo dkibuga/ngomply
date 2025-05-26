@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - NGOmply</title>
+    {% extends "base.html" %}
+</head>
+<body>
+    {% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="mb-4">Welcome to NGOmply</h1>
+            <p class="lead">Your centralized platform for NGO and CBO compliance management in Uganda</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="bi bi-file-earmark-text fs-1 text-primary mb-3"></i>
+                    <h5 class="card-title">Registration Module</h5>
+                    <p class="card-text">Manage your organization's registration process</p>
+                    <a href="{{ url_for('registration.index') }}" class="btn btn-primary">Access</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="bi bi-clipboard-check fs-1 text-success mb-3"></i>
+                    <h5 class="card-title">Compliance Module</h5>
+                    <p class="card-text">Track and manage operational compliance obligations</p>
+                    <a href="{{ url_for('compliance.index') }}" class="btn btn-success">Access</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="bi bi-calendar-check fs-1 text-warning mb-3"></i>
+                    <h5 class="card-title">Permit Renewal</h5>
+                    <p class="card-text">Streamline your permit renewal process</p>
+                    <a href="{{ url_for('permit_renewal.index') }}" class="btn btn-warning">Access</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="bi bi-book fs-1 text-info mb-3"></i>
+                    <h5 class="card-title">Knowledge Base</h5>
+                    <p class="card-text">Access regulatory information and guides</p>
+                    <a href="{{ url_for('knowledge_base.index') }}" class="btn btn-info">Access</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Upcoming Compliance Tasks</h5>
+                </div>
+                <div class="card-body">
+                    {% if current_user.organization and current_user.organization.compliance_tasks.filter_by(completed=False).count() > 0 %}
+                    <ul class="list-group">
+                        {% for task in current_user.organization.compliance_tasks.filter_by(completed=False).order_by(ComplianceTask.due_date).limit(5).all() %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ task.title }}
+                            <span class="badge bg-primary rounded-pill">{{ task.due_date.strftime('%Y-%m-%d') }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p class="text-muted">No upcoming tasks. Generate reminders in the Compliance Module.</p>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url_for('compliance.tasks') }}" class="btn btn-sm btn-outline-primary">View All Tasks</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Permit Status</h5>
+                </div>
+                <div class="card-body">
+                    {% if current_user.organization and current_user.organization.permit_expiry_date %}
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p><strong>Permit Number:</strong> {{ current_user.organization.registration_number or 'Not set' }}</p>
+                            <p><strong>Expiry Date:</strong> {{ current_user.organization.permit_expiry_date.strftime('%Y-%m-%d') }}</p>
+                            {% set days_until_expiry = (current_user.organization.permit_expiry_date - now).days %}
+                            <p><strong>Status:</strong> 
+                                {% if days_until_expiry <= 0 %}
+                                <span class="badge bg-danger">Expired</span>
+                                {% elif days_until_expiry <= 180 %}
+                                <span class="badge bg-warning">Renewal Required Soon</span>
+                                {% else %}
+                                <span class="badge bg-success">Valid</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div>
+                            {% if days_until_expiry <= 180 %}
+                            <a href="{{ url_for('permit_renewal.renewal_checklist') }}" class="btn btn-warning">Start Renewal</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% else %}
+                    <p class="text-muted">Permit information not set. Update in the Permit Renewal Module.</p>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url_for('permit_renewal.index') }}" class="btn btn-sm btn-outline-primary">Manage Permit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

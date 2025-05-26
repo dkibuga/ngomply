@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Legal Documents</h1>
+        <p class="lead">Access laws, regulations, and guidelines for NGOs and CBOs in Uganda</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Available Legal Documents</h5>
+            </div>
+            <div class="card-body">
+                {% if documents %}
+                <div class="list-group">
+                    {% for document in documents %}
+                    <a href="{{ url_for('knowledge_base.view_document', doc_id=document.id) }}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ document.title }}</h5>
+                            <small>{{ document.publication_date.strftime('%Y-%m-%d') if document.publication_date else 'N/A' }}</small>
+                        </div>
+                        <p class="mb-1">{{ document.document_type }}</p>
+                        <small>Last updated: {{ document.last_updated.strftime('%Y-%m-%d') }}</small>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <p>No legal documents available. Please update the knowledge base.</p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('knowledge_base.index') }}" class="btn btn-secondary">Back to Knowledge Base</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

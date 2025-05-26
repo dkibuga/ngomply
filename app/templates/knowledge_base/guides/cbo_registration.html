@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>CBO Registration Guide</h1>
+        <p class="lead">Complete guide to registering a Community Based Organization in Uganda</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Registration Process Overview</h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <p><strong>Note:</strong> This guide provides general information about the CBO registration process in Uganda. For personalized guidance, use the Registration Module in NGOmply.</p>
+                </div>
+                
+                <h4>Step 1: Prepare Required Documents</h4>
+                <p>Before registering your CBO, you need to prepare the following documents:</p>
+                <ol>
+                    <li>Draft Constitution</li>
+                    <li>Complete CBO Form K (Application for Registration)</li>
+                    <li>Prepare Annual Work Plan and Budget</li>
+                    <li>Prepare Governance Structure Chart</li>
+                    <li>Prepare Statement on Funding Sources</li>
+                </ol>
+                
+                <h4>Step 2: Submit to DNMC</h4>
+                <p>Submit your application to the District Non-Governmental Monitoring Committee (DNMC):</p>
+                <ol>
+                    <li>Pay prescribed fees</li>
+                    <li>Submit all required documents to the District Community Development Officer</li>
+                    <li>Attend an interview with the DNMC if required</li>
+                </ol>
+                
+                <h4>Step 3: Obtain Registration Certificate</h4>
+                <p>After approval, collect your CBO Registration Certificate from the District Community Development Office.</p>
+                
+                <h4>Required Documents</h4>
+                <ul>
+                    <li>CBO Constitution</li>
+                    <li>List of Founding Members with their signatures</li>
+                    <li>Minutes of the meeting that elected the Executive Committee</li>
+                    <li>Workplan and Budget</li>
+                    <li>Organizational Structure</li>
+                    <li>Proof of Payment of Registration Fees</li>
+                    <li>Recommendation letters from Local Council (LC1 and LC3)</li>
+                </ul>
+                
+                <h4>Fees</h4>
+                <p>Registration fees for CBOs vary by district but typically range from UGX 50,000 to UGX 100,000.</p>
+                
+                <h4>Important Considerations</h4>
+                <ul>
+                    <li>CBOs are registered at the district level and operate within that district only</li>
+                    <li>If you wish to operate in multiple districts, consider registering as an NGO instead</li>
+                    <li>CBOs must submit annual reports to the District Community Development Office</li>
+                    <li>Registration must be renewed periodically (typically every 1-2 years)</li>
+                </ul>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('knowledge_base.guides') }}" class="btn btn-secondary">Back to Guides</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

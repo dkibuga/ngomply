@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Compliance Guide</h1>
+        <p class="lead">Guide to maintaining operational compliance for NGOs and CBOs in Uganda</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Compliance Requirements Overview</h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <p><strong>Note:</strong> This guide provides general information about compliance requirements. For personalized guidance, use the Operational Compliance Module in NGOmply.</p>
+                </div>
+                
+                <h4>Annual Returns</h4>
+                <p>All registered NGOs and CBOs must submit annual returns to the relevant authorities:</p>
+                <ul>
+                    <li><strong>NGOs:</strong> Submit annual returns to the NGO Bureau by March 31st each year</li>
+                    <li><strong>CBOs:</strong> Submit annual returns to the District Community Development Office</li>
+                </ul>
+                <p>Annual returns typically include:</p>
+                <ul>
+                    <li>Annual report of activities</li>
+                    <li>Financial statements</li>
+                    <li>Updated list of board/executive committee members</li>
+                    <li>Updated workplan and budget</li>
+                </ul>
+                
+                <h4>Tax Compliance</h4>
+                <p>NGOs and CBOs must comply with tax regulations:</p>
+                <ul>
+                    <li>Register for Tax Identification Number (TIN)</li>
+                    <li>File monthly PAYE returns for employees</li>
+                    <li>File annual income tax returns</li>
+                    <li>Apply for tax exemptions where applicable</li>
+                </ul>
+                
+                <h4>Governance Requirements</h4>
+                <ul>
+                    <li>Hold regular board/executive committee meetings</li>
+                    <li>Maintain minutes of all meetings</li>
+                    <li>Hold annual general meetings</li>
+                    <li>Maintain proper financial records</li>
+                    <li>Adhere to the organization's constitution</li>
+                </ul>
+                
+                <h4>Operational Requirements</h4>
+                <ul>
+                    <li>Operate within the approved objectives and geographical area</li>
+                    <li>Maintain proper documentation of all activities</li>
+                    <li>Notify authorities of any changes in leadership or constitution</li>
+                    <li>Display registration certificate at the organization's premises</li>
+                    <li>Cooperate with monitoring visits from authorities</li>
+                </ul>
+                
+                <h4>Compliance Calendar</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Deadline</th>
+                            <th>Requirement</th>
+                            <th>Authority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>January 15</td>
+                            <td>PAYE Annual Return</td>
+                            <td>Uganda Revenue Authority</td>
+                        </tr>
+                        <tr>
+                            <td>March 31</td>
+                            <td>Annual Returns</td>
+                            <td>NGO Bureau / District Office</td>
+                        </tr>
+                        <tr>
+                            <td>June 30</td>
+                            <td>Income Tax Return</td>
+                            <td>Uganda Revenue Authority</td>
+                        </tr>
+                        <tr>
+                            <td>Monthly</td>
+                            <td>PAYE Returns</td>
+                            <td>Uganda Revenue Authority</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('knowledge_base.guides') }}" class="btn btn-secondary">Back to Guides</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

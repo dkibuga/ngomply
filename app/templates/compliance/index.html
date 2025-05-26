@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Operational Compliance Module</h1>
+        <p class="lead">Manage your organization's compliance obligations</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-list-check fs-1 text-primary mb-3"></i>
+                <h5 class="card-title">Compliance Tasks</h5>
+                <p class="card-text">View and manage compliance tasks</p>
+                <a href="{{ url_for('compliance.tasks') }}" class="btn btn-primary">View Tasks</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-bell fs-1 text-success mb-3"></i>
+                <h5 class="card-title">Generate Reminders</h5>
+                <p class="card-text">Generate standard compliance reminders</p>
+                <a href="{{ url_for('compliance.generate_reminders') }}" class="btn btn-success">Generate</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-clipboard-check fs-1 text-info mb-3"></i>
+                <h5 class="card-title">Audit Support</h5>
+                <p class="card-text">Access compliance audit support tools</p>
+                <a href="{{ url_for('compliance.audit_support') }}" class="btn btn-info">Access</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Upcoming Compliance Deadlines</h5>
+            </div>
+            <div class="card-body">
+                {% if current_user.organization and current_user.organization.compliance_tasks.filter_by(completed=False).count() > 0 %}
+                <ul class="list-group">
+                    {% for task in current_user.organization.compliance_tasks.filter_by(completed=False).order_by(ComplianceTask.due_date).limit(5).all() %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ task.title }}
+                        <span class="badge {% if task.due_date < now %}bg-danger{% elif (task.due_date - now).days < 30 %}bg-warning{% else %}bg-primary{% endif %} rounded-pill">
+                            {{ task.due_date.strftime('%Y-%m-%d') }}
+                        </span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="text-muted">No upcoming compliance tasks. Generate reminders to get started.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Add New Compliance Task</h5>
+            </div>
+            <div class="card-body">
+                <a href="{{ url_for('compliance.add_task') }}" class="btn btn-primary">Add Task</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

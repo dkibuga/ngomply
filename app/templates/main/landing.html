@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Welcome to NGOmply</h1>
+        <p class="lead">Your centralized platform for NGO and CBO compliance management in Uganda</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h2>Get Started</h2>
+                <p>Register or log in to access the full features of NGOmply.</p>
+                <div class="d-flex gap-2">
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Login</a>
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-outline-primary">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h3>Registration Module</h3>
+                <p>Streamline your organization's registration process with step-by-step guidance and document management.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h3>Compliance Module</h3>
+                <p>Stay on top of your compliance obligations with automated reminders and comprehensive tracking.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h3>Knowledge Base</h3>
+                <p>Access up-to-date information on relevant NGO laws, regulations, and guidelines.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

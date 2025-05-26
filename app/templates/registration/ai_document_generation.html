@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>AI Document Generation</h1>
+        <p class="lead">Generate documents using AI assistance</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h5>Select Document Type to Generate</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-file-earmark-text fs-1 text-primary mb-3"></i>
+                                <h5 class="card-title">Constitution/M&AOA</h5>
+                                <p class="card-text">Generate a constitution or memorandum and articles of association</p>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#constitutionModal">
+                                    Generate
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-file-earmark-text fs-1 text-success mb-3"></i>
+                                <h5 class="card-title">Meeting Minutes</h5>
+                                <p class="card-text">Generate meeting minutes template</p>
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#minutesModal">
+                                    Generate
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-file-earmark-text fs-1 text-info mb-3"></i>
+                                <h5 class="card-title">Request Letter</h5>
+                                <p class="card-text">Generate a formal request letter</p>
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#letterModal">
+                                    Generate
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('registration.index') }}" class="btn btn-secondary">Back to Registration</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Constitution Modal -->
+<div class="modal fade" id="constitutionModal" tabindex="-1" aria-labelledby="constitutionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="constitutionModalLabel">Generate Constitution/M&AOA</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ url_for('ai.generate_document') }}" method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="doc_type" value="constitution">
+                    <div class="mb-3">
+                        <label for="org_vision" class="form-label">Organization Vision</label>
+                        <input type="text" class="form-control" id="org_vision" name="org_vision" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="org_mission" class="form-label">Organization Mission</label>
+                        <input type="text" class="form-control" id="org_mission" name="org_mission" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="primary_objective" class="form-label">Primary Objective</label>
+                        <input type="text" class="form-control" id="primary_objective" name="primary_objective" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Generate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Minutes Modal -->
+<div class="modal fade" id="minutesModal" tabindex="-1" aria-labelledby="minutesModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="minutesModalLabel">Generate Meeting Minutes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ url_for('ai.generate_document') }}" method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="doc_type" value="minutes">
+                    <div class="mb-3">
+                        <label for="meeting_date" class="form-label">Meeting Date</label>
+                        <input type="date" class="form-control" id="meeting_date" name="meeting_date" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="meeting_type" class="form-label">Meeting Type</label>
+                        <select class="form-select" id="meeting_type" name="meeting_type" required>
+                            <option value="Board Meeting">Board Meeting</option>
+                            <option value="Annual General Meeting">Annual General Meeting</option>
+                            <option value="Executive Committee Meeting">Executive Committee Meeting</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Generate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Letter Modal -->
+<div class="modal fade" id="letterModal" tabindex="-1" aria-labelledby="letterModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="letterModalLabel">Generate Request Letter</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ url_for('ai.generate_document') }}" method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="doc_type" value="request_letter">
+                    <div class="mb-3">
+                        <label for="letter_subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="letter_subject" name="letter_subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="letter_purpose" class="form-label">Purpose of Request</label>
+                        <textarea class="form-control" id="letter_purpose" name="letter_purpose" rows="3" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-info">Generate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Register Organization</h1>
+        <p class="lead">Register your NGO or CBO in the system</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h5>Organization Registration Form</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('registration.register_organization') }}">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">{{ form.name.label }}</label>
+                        {{ form.name(class="form-control", id="name") }}
+                        {% for error in form.name.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="org_type" class="form-label">{{ form.org_type.label }}</label>
+                        {{ form.org_type(class="form-select", id="org_type") }}
+                        {% for error in form.org_type.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3" id="ngo_type_div">
+                        <label for="ngo_type" class="form-label">{{ form.ngo_type.label }}</label>
+                        {{ form.ngo_type(class="form-select", id="ngo_type") }}
+                        {% for error in form.ngo_type.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">{{ form.address.label }}</label>
+                        {{ form.address(class="form-control", id="address") }}
+                        {% for error in form.address.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">{{ form.phone.label }}</label>
+                        {{ form.phone(class="form-control", id="phone") }}
+                        {% for error in form.phone.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">{{ form.email.label }}</label>
+                        {{ form.email(class="form-control", id="email") }}
+                        {% for error in form.email.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="d-grid gap-2">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const orgTypeSelect = document.getElementById('org_type');
+        const ngoTypeDiv = document.getElementById('ngo_type_div');
+        
+        function toggleNgoTypeVisibility() {
+            if (orgTypeSelect.value === 'NGO') {
+                ngoTypeDiv.style.display = 'block';
+            } else {
+                ngoTypeDiv.style.display = 'none';
+            }
+        }
+        
+        // Initial state
+        toggleNgoTypeVisibility();
+        
+        // Event listener
+        orgTypeSelect.addEventListener('change', toggleNgoTypeVisibility);
+    });
+</script>
+{% endblock %}
+{% endblock %}

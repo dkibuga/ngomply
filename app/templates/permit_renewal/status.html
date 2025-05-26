@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Permit Status</h1>
+        <p class="lead">Check your current permit status and expiry information</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h5>Permit Information</h5>
+            </div>
+            <div class="card-body">
+                {% if organization and organization.permit_expiry_date %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Organization:</strong> {{ organization.name }}</p>
+                        <p><strong>Registration Number:</strong> {{ organization.registration_number or 'Not set' }}</p>
+                        <p><strong>Organization Type:</strong> {{ organization.org_type }}</p>
+                        {% if organization.org_type == 'NGO' and organization.ngo_type %}
+                        <p><strong>NGO Type:</strong> {{ organization.ngo_type }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Permit Expiry Date:</strong> {{ organization.permit_expiry_date.strftime('%Y-%m-%d') }}</p>
+                        <p><strong>Days Until Expiry:</strong> {{ days_until_expiry }}</p>
+                        <p><strong>Status:</strong> 
+                            {% if days_until_expiry <= 0 %}
+                            <span class="badge bg-danger">Expired</span>
+                            {% elif days_until_expiry <= 180 %}
+                            <span class="badge bg-warning">Renewal Required Soon</span>
+                            {% else %}
+                            <span class="badge bg-success">Valid</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="progress mt-4">
+                    {% if days_until_expiry <= 0 %}
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Expired</div>
+                    {% elif days_until_expiry <= 180 %}
+                    {% set percentage = (180 - days_until_expiry) / 180 * 100 %}
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{ percentage }}%" aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100">{{ days_until_expiry }} days left</div>
+                    {% else %}
+                    {% set percentage = 100 - (days_until_expiry / 365 * 100) %}
+                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ percentage }}%" aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100">{{ days_until_expiry }} days left</div>
+                    {% endif %}
+                </div>
+
+                {% if days_until_expiry <= 180 %}
+                <div class="alert alert-warning mt-4">
+                    <p><i class="bi bi-exclamation-triangle-fill"></i> Your permit will expire in {{ days_until_expiry }} days. You should begin the renewal process.</p>
+                    <a href="{{ url_for('permit_renewal.renewal_checklist') }}" class="btn btn-warning">Start Renewal Process</a>
+                </div>
+                {% endif %}
+
+                {% else %}
+                <div class="alert alert-info">
+                    <p>No permit information found. Please update your permit information.</p>
+                </div>
+                <a href="{{ url_for('permit_renewal.update_permit_info') }}" class="btn btn-primary">Update Permit Information</a>
+                {% endif %}
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-between">
+                    <a href="{{ url_for('permit_renewal.index') }}" class="btn btn-secondary">Back to Permit Renewal</a>
+                    {% if organization and organization.permit_expiry_date %}
+                    <a href="{{ url_for('permit_renewal.update_permit_info') }}" class="btn btn-primary">Update Permit Information</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

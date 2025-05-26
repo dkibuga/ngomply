@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Search Knowledge Base</h1>
+        <p class="lead">Find information in the knowledge base</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Search</h5>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('knowledge_base.search') }}" method="GET">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search for laws, regulations, forms, or guides..." name="query" value="{{ query if query }}">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </form>
+                
+                <div class="mt-4">
+                    <h6>Search Tips:</h6>
+                    <ul>
+                        <li>Use specific keywords for better results</li>
+                        <li>Search for document titles, codes, or content</li>
+                        <li>Try different terms if you don't find what you're looking for</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('knowledge_base.index') }}" class="btn btn-secondary">Back to Knowledge Base</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Document Checklist</h1>
+        <p class="lead">Required documents for {{ org_type }} registration</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>{{ org_type }} Registration Documents</h5>
+                {% if org_type == 'NGO' and ngo_type %}
+                <span class="badge bg-info">{{ ngo_type }} NGO</span>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Document</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in checklist %}
+                            <tr>
+                                <td>{{ item }}</td>
+                                <td>
+                                    <span class="badge bg-warning">Pending</span>
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('registration.upload_document') }}" class="btn btn-sm btn-primary">Upload</a>
+                                    <a href="{{ url_for('registration.ai_document_generation') }}" class="btn btn-sm btn-outline-secondary">Generate</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-between">
+                    <a href="{{ url_for('registration.registration_steps') }}" class="btn btn-secondary">Back to Steps</a>
+                    <a href="{{ url_for('registration.document_list') }}" class="btn btn-primary">View My Documents</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

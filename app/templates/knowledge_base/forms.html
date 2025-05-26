@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Forms</h1>
+        <p class="lead">Access required forms for NGOs and CBOs in Uganda</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Available Forms</h5>
+            </div>
+            <div class="card-body">
+                {% if forms %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Form Name</th>
+                                <th>Form Code</th>
+                                <th>Description</th>
+                                <th>Last Updated</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for form in forms %}
+                            <tr>
+                                <td>{{ form.name }}</td>
+                                <td><span class="badge bg-primary">{{ form.form_code }}</span></td>
+                                <td>{{ form.description }}</td>
+                                <td>{{ form.last_updated.strftime('%Y-%m-%d') }}</td>
+                                <td>
+                                    <a href="{{ form.file_path }}" class="btn btn-sm btn-primary" download>
+                                        <i class="bi bi-download"></i> Download
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <p>No forms available. Please update the knowledge base.</p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('knowledge_base.index') }}" class="btn btn-secondary">Back to Knowledge Base</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Common Forms</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Form A</h5>
+                                <p class="card-text">Application for Registration of an NGO</p>
+                                <a href="#" class="btn btn-primary">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Form D</h5>
+                                <p class="card-text">Recommendation by DNMC</p>
+                                <a href="#" class="btn btn-primary">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Form H</h5>
+                                <p class="card-text">Application for Renewal of Permit</p>
+                                <a href="#" class="btn btn-primary">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

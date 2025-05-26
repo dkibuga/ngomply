@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Permit Renewal Module</h1>
+        <p class="lead">Streamline your permit renewal process</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-card-checklist fs-1 text-primary mb-3"></i>
+                <h5 class="card-title">Permit Status</h5>
+                <p class="card-text">Check your current permit status</p>
+                <a href="{{ url_for('permit_renewal.status') }}" class="btn btn-primary">Check Status</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-list-check fs-1 text-success mb-3"></i>
+                <h5 class="card-title">Renewal Checklist</h5>
+                <p class="card-text">View required documents for renewal</p>
+                <a href="{{ url_for('permit_renewal.renewal_checklist') }}" class="btn btn-success">View Checklist</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-file-earmark-text fs-1 text-info mb-3"></i>
+                <h5 class="card-title">Document Aggregation</h5>
+                <p class="card-text">Aggregate documents for renewal</p>
+                <a href="{{ url_for('permit_renewal.document_aggregation') }}" class="btn btn-info">Aggregate</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-cash-coin fs-1 text-warning mb-3"></i>
+                <h5 class="card-title">Fee Information</h5>
+                <p class="card-text">View renewal fee information</p>
+                <a href="{{ url_for('permit_renewal.fee_information') }}" class="btn btn-warning">View Fees</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-signpost-split fs-1 text-danger mb-3"></i>
+                <h5 class="card-title">Renewal Wizard</h5>
+                <p class="card-text">Step-by-step guidance for renewal</p>
+                <a href="{{ url_for('permit_renewal.renewal_wizard') }}" class="btn btn-danger">Start Wizard</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

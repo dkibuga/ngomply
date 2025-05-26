@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Permit Renewal Guide</h1>
+        <p class="lead">Guide to renewing your organization's permit in Uganda</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Permit Renewal Process Overview</h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <p><strong>Note:</strong> This guide provides general information about the permit renewal process. For personalized guidance, use the Permit Renewal Module in NGOmply.</p>
+                </div>
+                
+                <h4>When to Renew</h4>
+                <p>Organizations should begin the renewal process at least 3 months before the expiry of their current permit. Permits are typically valid for:</p>
+                <ul>
+                    <li><strong>NGOs:</strong> 5 years</li>
+                    <li><strong>CBOs:</strong> 1-2 years (varies by district)</li>
+                </ul>
+                
+                <h4>Step 1: Prepare Required Documents</h4>
+                <p>Gather the following documents for renewal:</p>
+                <ul>
+                    <li>Completed Form H (Application for Renewal of Permit)</li>
+                    <li>Copy of current permit/certificate</li>
+                    <li>Annual reports for the period since last renewal</li>
+                    <li>Audited financial statements for the period since last renewal</li>
+                    <li>Updated workplan and budget</li>
+                    <li>Tax clearance certificate from URA</li>
+                    <li>Proof of payment of renewal fees</li>
+                </ul>
+                
+                <h4>Step 2: Pay Renewal Fees</h4>
+                <p>Renewal fees vary depending on the type of organization:</p>
+                <ul>
+                    <li>Local NGO: UGX 80,000</li>
+                    <li>Foreign NGO: USD 100</li>
+                    <li>International NGO: USD 300</li>
+                    <li>Regional NGO: USD 200</li>
+                    <li>CBO: Varies by district (typically UGX 30,000 - 50,000)</li>
+                </ul>
+                
+                <h4>Step 3: Submit Application</h4>
+                <p>Submit your application to the appropriate authority:</p>
+                <ul>
+                    <li><strong>NGOs:</strong> Submit to the NGO Bureau</li>
+                    <li><strong>CBOs:</strong> Submit to the District Community Development Office</li>
+                </ul>
+                
+                <h4>Step 4: Follow Up</h4>
+                <p>After submission:</p>
+                <ul>
+                    <li>Keep track of your application status</li>
+                    <li>Respond promptly to any requests for additional information</li>
+                    <li>Attend any interviews or meetings if required</li>
+                </ul>
+                
+                <h4>Step 5: Collect Renewed Permit</h4>
+                <p>Once approved, collect your renewed permit from the issuing authority.</p>
+                
+                <h4>Common Reasons for Renewal Rejection</h4>
+                <ul>
+                    <li>Incomplete documentation</li>
+                    <li>Non-compliance with reporting requirements</li>
+                    <li>Tax non-compliance</li>
+                    <li>Operating outside approved objectives or geographical area</li>
+                    <li>Governance issues or complaints against the organization</li>
+                </ul>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('knowledge_base.guides') }}" class="btn btn-secondary">Back to Guides</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

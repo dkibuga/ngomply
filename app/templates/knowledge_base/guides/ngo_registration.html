@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>NGO Registration Guide</h1>
+        <p class="lead">Complete guide to registering an NGO in Uganda</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Registration Process Overview</h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <p><strong>Note:</strong> This guide provides general information about the NGO registration process in Uganda. For personalized guidance, use the Registration Module in NGOmply.</p>
+                </div>
+                
+                <h4>Step 1: URSB Incorporation</h4>
+                <p>Before registering with the NGO Bureau, you must first incorporate your organization with the Uganda Registration Services Bureau (URSB).</p>
+                <ol>
+                    <li>Prepare Memorandum and Articles of Association</li>
+                    <li>Complete URSB Form 20 (Application for Registration)</li>
+                    <li>Complete URSB Form 18 (Notice of Situation of Registered Office)</li>
+                    <li>Pay prescribed fees</li>
+                    <li>Submit application to URSB</li>
+                </ol>
+                
+                <h4>Step 2: NGO Bureau Registration</h4>
+                <p>After incorporation with URSB, you must register with the National Bureau for Non-Governmental Organizations.</p>
+                <ol>
+                    <li>Complete NGO Bureau Form A (Application for Registration)</li>
+                    <li>Obtain NGO Bureau Form D (Recommendation by DNMC)</li>
+                    <li>Complete NGO Bureau Form N (Notification of Executive Committee Members)</li>
+                    <li>Prepare Annual Work Plan and Budget</li>
+                    <li>Prepare Governance Structure Chart</li>
+                    <li>Prepare Statement on Funding Sources</li>
+                    <li>Prepare Statement on Staffing Requirements</li>
+                    <li>Pay prescribed fees</li>
+                    <li>Submit application to NGO Bureau</li>
+                </ol>
+                
+                <h4>Step 3: Obtain Permit of Operation</h4>
+                <p>After approval, collect your Certificate of Registration and Permit of Operation from the NGO Bureau.</p>
+                
+                <h4>Required Documents</h4>
+                <ul>
+                    <li>Certificate of Incorporation from URSB</li>
+                    <li>Memorandum and Articles of Association</li>
+                    <li>Organization Constitution</li>
+                    <li>Proof of Payment of Registration Fees</li>
+                    <li>Minutes of the General Assembly that elected the Governing Body</li>
+                    <li>Workplan and Budget</li>
+                    <li>Organizational Structure</li>
+                    <li>Recommendation from DNMC (Form D)</li>
+                </ul>
+                
+                <h4>Fees</h4>
+                <p>Registration fees vary depending on the type of NGO:</p>
+                <ul>
+                    <li>Local NGO: UGX 100,000</li>
+                    <li>Foreign NGO: USD 150</li>
+                    <li>International NGO: USD 350</li>
+                    <li>Regional NGO: USD 250</li>
+                </ul>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('knowledge_base.guides') }}" class="btn btn-secondary">Back to Guides</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

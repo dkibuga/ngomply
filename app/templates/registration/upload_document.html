@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Upload Document</h1>
+        <p class="lead">Upload a document for your organization</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h5>Document Upload Form</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('registration.upload_document') }}" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">{{ form.name.label }}</label>
+                        {{ form.name(class="form-control", id="name") }}
+                        {% for error in form.name.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="document_type" class="form-label">{{ form.document_type.label }}</label>
+                        {{ form.document_type(class="form-select", id="document_type") }}
+                        {% for error in form.document_type.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="document" class="form-label">{{ form.document.label }}</label>
+                        {{ form.document(class="form-control", id="document") }}
+                        {% for error in form.document.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="d-grid gap-2">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('registration.document_list') }}" class="btn btn-secondary">Back to Documents</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

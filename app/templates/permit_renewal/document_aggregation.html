@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Document Aggregation</h1>
+        <p class="lead">Aggregate documents for your permit renewal</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Available Documents for Renewal</h5>
+            </div>
+            <div class="card-body">
+                {% if documents %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Upload Date</th>
+                                <th>Include</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for document in documents %}
+                            <tr>
+                                <td>{{ document.name }}</td>
+                                <td>{{ document.document_type }}</td>
+                                <td>{{ document.upload_date.strftime('%Y-%m-%d') }}</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="doc{{ document.id }}">
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-3">
+                    <button class="btn btn-primary" id="aggregateBtn">Aggregate Selected Documents</button>
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <p>No documents available for aggregation. Please upload documents in the Registration Module.</p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('permit_renewal.index') }}" class="btn btn-secondary">Back to Permit Renewal</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const aggregateBtn = document.getElementById('aggregateBtn');
+        if (aggregateBtn) {
+            aggregateBtn.addEventListener('click', function() {
+                alert('Documents aggregated successfully! You can now download the aggregated package for submission.');
+            });
+        }
+    });
+</script>
+{% endblock %}

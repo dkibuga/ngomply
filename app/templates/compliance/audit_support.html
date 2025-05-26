@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Compliance Audit Support</h1>
+        <p class="lead">Tools and resources for compliance audits</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5>Audit Resources</h5>
+                <a href="{{ url_for('compliance.generate_audit_methodology') }}" class="btn btn-primary">Generate Audit Methodology</a>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Documents for Audit</h5>
+                        {% if documents %}
+                        <div class="list-group">
+                            {% for document in documents %}
+                            <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">{{ document.name }}</h6>
+                                    <small>{{ document.document_type }}</small>
+                                </div>
+                                <span class="badge bg-primary rounded-pill">{{ document.upload_date.strftime('%Y-%m-%d') }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <div class="alert alert-info">
+                            <p>No documents available. Upload documents in the Registration Module.</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Completed Compliance Tasks</h5>
+                        {% if completed_tasks %}
+                        <div class="list-group">
+                            {% for task in completed_tasks %}
+                            <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">{{ task.title }}</h6>
+                                    <small>{{ task.task_type }}</small>
+                                </div>
+                                <span class="badge bg-success rounded-pill">{{ task.completion_date.strftime('%Y-%m-%d') }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <div class="alert alert-info">
+                            <p>No completed compliance tasks. Complete tasks in the Compliance Module.</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('compliance.index') }}" class="btn btn-secondary">Back to Compliance</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

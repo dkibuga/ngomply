@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Update Permit Information</h1>
+        <p class="lead">Update your organization's permit information</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h5>Permit Details</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('permit_renewal.update_permit_info') }}">
+                    <div class="mb-3">
+                        <label for="registration_number" class="form-label">Registration/Permit Number</label>
+                        <input type="text" class="form-control" id="registration_number" name="registration_number" 
+                               value="{{ organization.registration_number if organization else '' }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="expiry_date" class="form-label">Permit Expiry Date</label>
+                        <input type="date" class="form-control" id="expiry_date" name="expiry_date" 
+                               value="{{ organization.permit_expiry_date.strftime('%Y-%m-%d') if organization and organization.permit_expiry_date else '' }}" required>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Update Information</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('permit_renewal.index') }}" class="btn btn-secondary">Back to Permit Renewal</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
