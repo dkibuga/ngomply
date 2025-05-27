@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app, abort, send_file
 from flask_login import login_required, current_user
-from app.models.models import ComplianceTask, Organization, AIGeneratedDocument
+from app.models.models import ComplianceTask, Organization, AIGeneratedDocument, User
 from app.forms.compliance_forms import ComplianceTaskForm
 from app import db
 from datetime import datetime, timedelta
@@ -38,11 +38,16 @@ def index():
         completed=True
     ).order_by(ComplianceTask.completion_date.desc()).limit(5).all()
     
+    # Pass current time for date comparisons in template
+    now = datetime.utcnow()
+    
     return render_template('compliance/index.html', 
                           organization=organization,
                           upcoming_tasks=upcoming_tasks,
                           overdue_tasks=overdue_tasks,
-                          completed_tasks=completed_tasks)
+                          completed_tasks=completed_tasks,
+                          ComplianceTask=ComplianceTask,
+                          now=now)
 
 @compliance_bp.route('/tasks')
 @login_required
@@ -75,7 +80,15 @@ def tasks():
     else:
         tasks = query.order_by(ComplianceTask.due_date).all()
     
-    return render_template('compliance/tasks.html', tasks=tasks, status=status, task_type=task_type)
+    # Pass current time for date comparisons in template
+    now = datetime.utcnow()
+    
+    return render_template('compliance/tasks.html', 
+                          tasks=tasks, 
+                          status=status, 
+                          task_type=task_type,
+                          ComplianceTask=ComplianceTask,
+                          now=now)
 
 @compliance_bp.route('/add_task', methods=['GET', 'POST'])
 @login_required

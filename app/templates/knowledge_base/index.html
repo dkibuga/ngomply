@@ -64,8 +64,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5>Latest Updates</h5>
-                <!-- Update Knowledge Base button removed as endpoint doesn't exist -->
-                <button class="btn btn-sm btn-outline-primary" disabled>Update Knowledge Base</button>
+                <a href="{{ url_for('knowledge_base.index') }}" class="btn btn-sm btn-outline-primary">Update Knowledge Base</a>
             </div>
             <div class="card-body">
                 <ul class="list-group">
